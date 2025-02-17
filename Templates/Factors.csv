@@ -1,0 +1,24 @@
+Material,RSSB Carbon Factor,Carbon Factor,Unit,Reference,Density (kg/m3)
+Steel section e.g. SHS,Steel - Section,1.55,kgCO2e/kg,Bath ICE v3.0,7800
+Steel plate e.g. web,Steel - Plate,2.46,kgCO2e/kg,Bath ICE v3.0,7800
+Stone,Stone - General,0.079,kgCO2e/kg,Bath ICE v3.0,2515
+Concrete C20/25,Concrete - 20/25 MPa - Average UK Additions,0.112,kgCO2e/kg,Bath ICE v3.0,2400
+Concrete C32/40,Concrete - 32/40 MPa - Average UK Additions,0.138,kgCO2e/kg,Bath ICE v3.0,2400
+Concrete C30/37,Concrete C30/37,250,kgCO2e/m3,,2400
+Concrete C40/50,Concrete - 40/50 MPa - Average UK Additions,0.159,kgCO2e/kg,Bath ICE v3.0,2400
+Concrete C50/60,Concrete C50/60,280,kgCO2e/m3,,2400
+Rebar,Steel - Rebar,1.99,kgCO2e/kg,Bath ICE v3.0,7800
+GRP,Glass Reinforced Plastic (GRP) - Fibreglass - General,8.59,kgCO2e/kg,Bath ICE v2.0,25
+Paint,Paint - Solvent borne,3.76,kgCO2e/kg,Bath ICE v2.0, 
+HDPE,HDPE - Pipe,2.52,kgCO2e/kg,Bath ICE v2.0,941
+Masonry,Masonry Brick,0.213,kgCO2e/kg,Bath ICE v3.0,2165
+Asphalt,Asphalt - 5% binder conent,15.2,kgCO2e/m2,Bath ICE v3.0,0 
+Type 6N fill,Aggregates and Sand,0.00747,kgCO2e/kg,Bath ICE v3.0,2240
+Type 1 granular,Aggregates and Sand,0.00747,kgCO2e/kg,Bath ICE v3.0,2240
+Grout,Grout,2.63,kgCO2e/kg,SIKA EPD,1800
+Rubber,Rubber - General,2.85,kgCO2e/kg,Bath ICE v3.0,1500
+Defaultlevel,Defaultlevel,0,Defaultlevel,Defaultlevel,0
+Removedlevel,Removedlevel,0,Removedlevel,Removedlevel,0
+Existinglevel,Existinglevel,0,Existinglevel,Existinglevel,0
+Misclevel,Misclevel,0,Misclevel,Misclevel,0
+DesignByOthers,DesignByOthers,0,DesignByOthers,DesignByOthers,0

@@ -1,0 +1,27 @@
+Layer,Material
+IfcColumn/UB-Universal Beams-Column1,Steel section e.g. SHS
+IfcWallStandardCase/Basic Wall,Masonry
+IfcWall/Basic Wall,Masonry
+IfcSlab/Foundation Slab,Concrete C20/25
+IfcSlab/Footing-Rectangular,Concrete C32/40
+IfcSlab/Structural Foundations 1,Concrete C32/40
+IfcBeam/Concrete-Rectangular Beam,Concrete C30/37
+IfcDoor/AW 1810X3300 Door,HDPE
+IfcDoor/AW 1810X3300 Door and a half,HDPE
+IfcDoor/AW door,HDPE
+IfcMember/Assembled Stair,Steel plate e.g. web
+IfcStairFlight/Assembled Stair,Steel plate e.g. web
+IfcRailing/Railing,Steel section e.g. SHS
+IfcSlab/Assembled Stair,Concrete C30/37
+IfcSlab/Floor,Concrete C40/50
+IfcBeam/UB-Universal Beams,Steel section e.g. SHS
+IfcSlab/Basic Roof,Concrete C30/37
+IfcDoorStyle/AW 1810X3300 Door and a half,HDPE
+IfcDoorStyle/AW 1810X3300 Door,HDPE
+IfcDoorStyle/AW door,HDPE
+IfcBeamType/Concrete-Rectangular Beam,Concrete C30/37
+IfcOpeningElement/Foundation Slab,Concrete C20/25
+IfcOpeningElement/Basic Wall,Masonry
+IfcOpeningElement/AW 1810X3300 Door and a half,HDPE
+IfcOpeningElement/AW 1810X3300 Door,HDPE
+IfcOpeningElement/AW door,HDPE
