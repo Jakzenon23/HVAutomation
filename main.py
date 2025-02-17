@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 import shutil
-import carbonreport 
+import AutomationReport 
 from zipfile import ZipFile
 
 def delete_folder(folder_path):
