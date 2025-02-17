@@ -62,7 +62,7 @@ if files_uploaded:
         # Example: Just list the files in the uploaded folder
         for fileRead in os.listdir(upload_folder):
             st.write(f"Processing file: {fileRead}")
-            carbonreport.main(fileRead)
+            AutomationReport.main(fileRead)
 
         # Add custom logic here to process the uploaded files
         st.success("File processing complete!")
