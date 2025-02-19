@@ -2,6 +2,7 @@ import streamlit as st
 import os
 import shutil
 import AutomationReport 
+import time
 from zipfile import ZipFile
 
 def delete_folder(folder_path):
@@ -64,6 +65,7 @@ uploaded_files = st.file_uploader("Upload Files", type=None, accept_multiple_fil
    # - Same process with combining the reports but then it only wants assets that are at foundation level, should just be able to have an if statement and loop through the excel to only grab the data that is at
     #foundation level, this should be a simplified list of unique assets for design
     #- Excel report, check the one note for link to code to integrate the two excels
+    # check to see if Column_drop = 'Name' will work with one of the excels, check with Gilberto to see if he wants one or the other or both?
 
 
 
