@@ -10,6 +10,12 @@ def change_permissions(path):
             filepath = os.path.join(foldername, filename)
             os.chmod(filepath, stat.S_IWRITE)  # Remove read-only attribute
 
+
+
+
+
+# All of this is going to be changed to make sure that it allows the user to ombine the two excel files together for the report A and Report B
+
 def clear_folder(path):
     """Clear the contents of the folder before writing to it."""
     for filename in os.listdir(path):
