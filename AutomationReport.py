@@ -4,7 +4,7 @@ import stat
 import shutil
 
 def change_permissions(path):
-    """Change permissions of files in the directory to ensure we can write to them."""
+   # Changing permissions, check to see if the file is in read-only and remove it
     for foldername, subfolders, filenames in os.walk(path):
         for filename in filenames:
             filepath = os.path.join(foldername, filename)
