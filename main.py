@@ -37,35 +37,34 @@ uploaded_files = st.file_uploader("Upload Files", type=None, accept_multiple_fil
 
 ############################### STEP 1
 
-'''
-1) Allowing the user to input the two excel files- SOPS file and the DIMS file
-2) Combine the two excel files into a single one- 03a combined SOPS/DIMS
-'''
+
+#1) Allowing the user to input the two excel files- SOPS file and the DIMS file
+#2) Combine the two excel files into a single one- 03a combined SOPS/DIMS
+
 
 
 ############################# STEP 2
 
-'''
-1) Allowing the user to input the two excel files- SOPS file and the DIMS file
-2) Seperate function that is going to only extract assets that are on foundation level, by exporting a simple list of unique assets- 03B foundationLevel_assets
-'''
+
+#1) Allowing the user to input the two excel files- SOPS file and the DIMS file
+#2) Seperate function that is going to only extract assets that are on foundation level, by exporting a simple list of unique assets- 03B foundationLevel_assets
+
 
 
 
 ########################### Ideas
-'''
- 1) 03A combined- should be fairly easy, just allow the user to input the excel files- test this later if it works we get a Hellow world comment for example
-     - Once it has been tested and works, combine the two excel files and drop the duplicate column of the Name
-     - Name the report, 03a combinedReport
-     - Combining the report, try and find a way to drop duplicate columns should be fairly straightforward column_drop = ''- link is in the onenote streamlit 
 
-2) 03B combined- seperate function that will combine them but will only combine the assets that are on the foundation level(ask Gilberto how to distinguish both using the excel files)
-    - The combined report will then export a simplified list of unique asset for design(when it says unique)- is it dropping all the duplicates??
-    - Same process with combining the reports but then it only wants assets that are at foundation level, should just be able to have an if statement and loop through the excel to only grab the data that is at
-    foundation level, this should be a simplified list of unique assets for design
-    - Excel report, check the one note for link to code to integrate the two excels
-    - 
-'''
+ #1) 03A combined- should be fairly easy, just allow the user to input the excel files- test this later if it works we get a Hellow world comment for example
+    # - Once it has been tested and works, combine the two excel files and drop the duplicate column of the Name
+     #- Name the report, 03a combinedReport
+     #- Combining the report, try and find a way to drop duplicate columns should be fairly straightforward column_drop = ''- link is in the onenote streamlit 
+
+#2) 03B combined- seperate function that will combine them but will only combine the assets that are on the foundation level(ask Gilberto how to distinguish both using the excel files)
+   # - The combined report will then export a simplified list of unique asset for design(when it says unique)- is it dropping all the duplicates??
+   # - Same process with combining the reports but then it only wants assets that are at foundation level, should just be able to have an if statement and loop through the excel to only grab the data that is at
+    #foundation level, this should be a simplified list of unique assets for design
+    #- Excel report, check the one note for link to code to integrate the two excels
+
 
 
 # Variable to track if files were uploaded
