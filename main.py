@@ -2,7 +2,6 @@ import streamlit as st
 import os
 import shutil
 import AutomationReport 
-import time
 from zipfile import ZipFile
 
 def delete_folder(folder_path):
@@ -12,68 +11,74 @@ def delete_folder(folder_path):
     except Exception as e:
         print(f'Failed to delete {folder_path}. Reason: {e}')
 
-# Delete folders
+# 1. Clean up old folders
 delete_folder("DWG_Reports")
 delete_folder("Output_Reports")
 
-# Folders where the uploaded files will be saved and where output will be stored
+# 2. Create new folders if they don't exist
 upload_folder = "DWG_Reports"
 if not os.path.exists(upload_folder):
     os.makedirs(upload_folder)
+
 output_folder = "Output_Reports"
 if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
-# Streamlit title and description
+# 3. Streamlit UI
 st.image("https://www.workspace-interiors.co.uk/application/files/thumbnails/xs/3416/1530/8285/tony_gee_large_logo_no_background.png", width=250)
 st.title("Tony Gee Manchester, HV Automation")
 st.write("Drag and drop Excel files below to upload them.")
 
-# File uploader widget (allows multiple files)
+# 4. File uploader widget (allows multiple files)
 uploaded_files = st.file_uploader("Upload Files", type=["xlsx", "xls"], accept_multiple_files=True)
 
-# Variable to track if files were uploaded
+# Track whether files were uploaded
 files_uploaded = False
 
-# Process and save each uploaded file
+# 5. Save each uploaded file to DWG_Reports
 if uploaded_files:
     for uploaded_file in uploaded_files:
-        # Get the file details
         file_name = uploaded_file.name
         file_path = os.path.join(upload_folder, file_name)
 
-        # Save the uploaded file to the folder
         with open(file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
 
-        # Show a success message for each uploaded file
         st.success(f"File '{file_name}' uploaded successfully!")
 
-    # Set flag to true if files have been uploaded
+    # Set flag to True if files have been uploaded
     files_uploaded = True
 
-# Display a button to run code if files have been uploaded
+# 6. If files have been uploaded, show a button to process them
 if files_uploaded:
     if st.button("Process Uploaded Files"):
         st.write("Processing files...")
 
-        # Instead of processing each file individually, call the new combine function
+        # Debug: list the files in DWG_Reports
+        dwg_contents = os.listdir(upload_folder)
+        st.write("Files in DWG_Reports folder:", dwg_contents)
+
+        # Call the new combine function from AutomationReport
         AutomationReport.combine_excel_files(
             input_folder=upload_folder,
             output_folder=output_folder,
             output_filename="combined_report.xlsx"
         )
 
-        st.success("Files combined successfully!")
+        # Debug: list the files in Output_Reports
+        output_contents = os.listdir(output_folder)
+        st.write("Files in Output_Reports folder:", output_contents)
 
-        # Zip the output folder for download (will include the combined report)
+        st.success("File processing complete!")
+
+        # 7. Zip everything in Output_Reports and provide download
         zip_path = "processed_files.zip"
         with ZipFile(zip_path, 'w') as zipf:
             for root, dirs, files in os.walk(output_folder):
                 for file in files:
                     zipf.write(os.path.join(root, file), arcname=file)
 
-        # Download Button for Processed Files
+        # Download button for the processed zip file
         with open(zip_path, "rb") as f:
             st.download_button(
                 label="Download Processed Files", 
