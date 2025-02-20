@@ -59,11 +59,12 @@ if files_uploaded:
         st.write("Files in DWG_Reports folder:", dwg_contents)
 
         # Call the new combine function from AutomationReport
-        AutomationReport.combine_excel_files(
-            input_folder=upload_folder,
-            output_folder=output_folder,
-            output_filename="combined_report.xlsx"
-        )
+        AutomationReport.combine_excel_files_side_by_side(
+        input_folder=upload_folder,
+        output_folder=output_folder,
+        output_filename="combined_report.xlsx"
+    )
+
 
         # Debug: list the files in Output_Reports
         output_contents = os.listdir(output_folder)
