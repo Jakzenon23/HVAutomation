@@ -82,11 +82,4 @@ if files_uploaded:
             for root, dirs, files in os.walk(output_folder):
                 for file in files:
                     zipf.write(os.path.join(root, file), arcname=file)
-
-        # Download
-        with open(zip_path, "rb") as f:
-            #st.download_button(
-                label="Download Foundation Files", 
-                data=f, 
-                file_name="processed_files_foundation.zip"
             )
