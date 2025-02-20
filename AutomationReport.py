@@ -129,13 +129,3 @@ def main(fileRead):
     
     print('\n############################', "End file process!", "############################\n")
 
-####################
-### Start Script ###
-####################
-# filenames()
-# fileList = filenames()
-# for fileRead in fileList:
-#    fileRead = str(fileRead)
-#    main(fileRead)
-
-# print('All done!!!')
