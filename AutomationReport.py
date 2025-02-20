@@ -20,6 +20,9 @@ def combine_excel_files_side_by_side(
         file_path = os.path.join(input_folder, file)
         try:
             df = pd.read_excel(file_path, engine="openpyxl")
+            # If this is the specific file, drop the specified columns
+            if file == "02-ModelQuantitiesSOPS.xlsx":
+                df = df.drop(columns=["Name", "ID"], errors="ignore")
             dataframes.append(df)
         except:
             pass  # Silently ignore errors or handle them as you prefer
@@ -52,6 +55,9 @@ def combine_excel_files_foundation_level(
         file_path = os.path.join(input_folder, file)
         try:
             df = pd.read_excel(file_path, engine="openpyxl")
+            # Drop columns for the specific file if present
+            if file == "02-ModelQuantitiesSOPS.xlsx":
+                df = df.drop(columns=["Name", "ID"], errors="ignore")
             dataframes.append(df)
         except:
             pass  # Silently ignore errors or handle them as you prefer
