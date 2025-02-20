@@ -6,9 +6,11 @@ def combine_excel_files(input_folder="DWG_Reports", output_folder="Output_Report
     Reads all Excel files in the input folder, concatenates them into one DataFrame,
     and saves the combined DataFrame as an Excel file in the output folder.
     """
-    # List all Excel files in the input folder
+    # List all Excel files in the input folder (case-insensitive check)
     excel_files = [os.path.join(input_folder, file) for file in os.listdir(input_folder)
-                   if file.endswith(('.xlsx', '.xls'))]
+                   if file.lower().endswith(('.xlsx', '.xls'))]
+    
+    print("Found Excel files:", excel_files)
     
     if not excel_files:
         print(f"No Excel files found in {input_folder}.")
@@ -17,7 +19,7 @@ def combine_excel_files(input_folder="DWG_Reports", output_folder="Output_Report
     dataframes = []
     for file in excel_files:
         try:
-            df = pd.read_excel(file)
+            df = pd.read_excel(file, engine="openpyxl")
             dataframes.append(df)
         except Exception as e:
             print(f"Error reading file {file}: {e}")
