@@ -38,7 +38,7 @@ if uploaded_files:
     files_uploaded = True
 
 if files_uploaded:
-    if st.button("Process Uploaded Files (Side by Side)"):
+    if st.button("Process Uploaded Files"):
         # Call side-by-side function
         AutomationReport.combine_excel_files_side_by_side(
             input_folder=upload_folder,
@@ -63,7 +63,7 @@ if files_uploaded:
                 file_name="processed_files.zip"
             )
 
-    if st.button("Process Foundation Level Files"):
+   # if st.button("Process Foundation Level Files"):
         # Call foundation-level function
         AutomationReport.combine_excel_files_foundation_level(
             input_folder=upload_folder,
