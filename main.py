@@ -21,6 +21,7 @@ os.makedirs(upload_folder, exist_ok=True)
 output_folder = "Output_Reports"
 os.makedirs(output_folder, exist_ok=True)
 
+st.image("https://www.workspace-interiors.co.uk/application/files/thumbnails/xs/3416/1530/8285/tony_gee_large_logo_no_background.png", width=250)
 st.title("Tony Gee Manchester, HV Automation")
 st.write("Drag and drop Excel files below to upload them.")
 
