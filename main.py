@@ -85,7 +85,7 @@ if files_uploaded:
 
         # Download
         with open(zip_path, "rb") as f:
-            st.download_button(
+            #st.download_button(
                 label="Download Foundation Files", 
                 data=f, 
                 file_name="processed_files_foundation.zip"
