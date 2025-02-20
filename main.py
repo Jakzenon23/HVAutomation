@@ -35,7 +35,6 @@ if uploaded_files:
         file_path = os.path.join(upload_folder, file_name)
         with open(file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
-
     files_uploaded = True
 
 if files_uploaded:
@@ -46,41 +45,19 @@ if files_uploaded:
             output_folder=output_folder,
             output_filename="combined_report.xlsx"
         )
-        # Show minimal success message
         st.success("File processing complete!")
         
-        # Zip
+        # Zip the output folder
         zip_path = "processed_files.zip"
         with ZipFile(zip_path, 'w') as zipf:
             for root, dirs, files in os.walk(output_folder):
                 for file in files:
                     zipf.write(os.path.join(root, file), arcname=file)
-
-        # Download
+        
+        # Provide a download button for the ZIP file
         with open(zip_path, "rb") as f:
             st.download_button(
                 label="Download Processed Files", 
                 data=f, 
                 file_name="processed_files.zip"
             )
-
-   # if st.button("Process Foundation Level Files"):
-        # Call foundation-level function
-        AutomationReport.combine_excel_files_foundation_level(
-            input_folder=upload_folder,
-            output_folder=output_folder,
-            output_filename="combined_reportFoundationLevel.xlsx",
-            filter_column="Level",
-            filter_value="Foundation"
-        )
-        # Show minimal success message
-        st.success("File processing complete!")
-        
-        # Zip
-        zip_path = "processed_files_foundation.zip"
-        with ZipFile(zip_path, 'w') as zipf:
-            for root, dirs, files in os.walk(output_folder):
-                for file in files:
-                    zipf.write(os.path.join(root, file), arcname=file)
-            )
-)
