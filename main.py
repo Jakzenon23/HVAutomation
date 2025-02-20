@@ -83,3 +83,4 @@ if files_uploaded:
                 for file in files:
                     zipf.write(os.path.join(root, file), arcname=file)
             )
+)
