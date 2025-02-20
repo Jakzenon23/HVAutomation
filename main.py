@@ -12,12 +12,11 @@ def delete_folder(folder_path):
     except Exception as e:
         print(f'Failed to delete {folder_path}. Reason: {e}')
 
-#delete folders
+# Delete folders
 delete_folder("DWG_Reports")
 delete_folder("Output_Reports")
 
-# Folder where the uploaded files will be saved
-# Create the folder if it doesn't exist
+# Folders where the uploaded files will be saved and where output will be stored
 upload_folder = "DWG_Reports"
 if not os.path.exists(upload_folder):
     os.makedirs(upload_folder)
@@ -26,13 +25,12 @@ if not os.path.exists(output_folder):
     os.makedirs(output_folder)
 
 # Streamlit title and description
-st.image("https://www.workspace-interiors.co.uk/application/files/thumbnails/xs/3416/1530/8285/tony_gee_large_logo_no_background.png",width=250)
+st.image("https://www.workspace-interiors.co.uk/application/files/thumbnails/xs/3416/1530/8285/tony_gee_large_logo_no_background.png", width=250)
 st.title("Tony Gee Manchester, HV Automation")
-st.write("Drag and drop CSV files below to upload them.")
+st.write("Drag and drop Excel files below to upload them.")
 
-# File uploader widget (allows multiple files), will be where I am adding the Excel files
-uploaded_files = st.file_uploader("Upload Files", type=None, accept_multiple_files=True)
-
+# File uploader widget (allows multiple files)
+uploaded_files = st.file_uploader("Upload Files", type=["xlsx", "xls"], accept_multiple_files=True)
 
 # Variable to track if files were uploaded
 files_uploaded = False
@@ -56,27 +54,29 @@ if uploaded_files:
 
 # Display a button to run code if files have been uploaded
 if files_uploaded:
-    # Show a button
     if st.button("Process Uploaded Files"):
-        # Your custom code goes here
         st.write("Processing files...")
 
-        # Example: Just list the files in the uploaded folder
-        for fileRead in os.listdir(upload_folder):
-            st.write(f"Processing file: {fileRead}")
-            AutomationReport.main(fileRead)
+        # Instead of processing each file individually, call the new combine function
+        AutomationReport.combine_excel_files(
+            input_folder=upload_folder,
+            output_folder=output_folder,
+            output_filename="combined_report.xlsx"
+        )
 
-        # Add custom logic here to process the uploaded files
-        st.success("File processing complete!")
+        st.success("Files combined successfully!")
 
+        # Zip the output folder for download (will include the combined report)
         zip_path = "processed_files.zip"
         with ZipFile(zip_path, 'w') as zipf:
             for root, dirs, files in os.walk(output_folder):
                 for file in files:
                     zipf.write(os.path.join(root, file), arcname=file)
-        
-        # 4. Add Download Button for Processed Files
+
+        # Download Button for Processed Files
         with open(zip_path, "rb") as f:
-            st.download_button(label="Download Processed Files", 
-                               data=f, 
-                               file_name="processed_files.zip")
+            st.download_button(
+                label="Download Processed Files", 
+                data=f, 
+                file_name="processed_files.zip"
+            )
