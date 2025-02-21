@@ -4,7 +4,7 @@ import os
 def combine_excel_files_side_by_side(
     input_folder="DWG_Reports", 
     output_folder="Output_Reports", 
-    output_filename="combined_report.xlsx"
+    output_filename="3a_combined_report.xlsx"
 ):
     """
     Reads all Excel files in the input folder and places them side by side
