@@ -47,7 +47,7 @@ if files_uploaded:
         )
 
         # ✅ Generate Filtered Unique Assets Report (New)
-        AutomationReport.generate_filtered_unique_assets(
+        AutomationReport.generate_filtered_and_unique_assets(
             combined_file_path=os.path.join(output_folder, "combined_report.xlsx"),
             output_folder=output_folder,
             output_filename="filtered_unique_assets.xlsx"
