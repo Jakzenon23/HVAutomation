@@ -43,13 +43,13 @@ if files_uploaded:
         AutomationReport.combine_excel_files_side_by_side(
             input_folder=upload_folder,
             output_folder=output_folder,
-            output_filename="combined_report.xlsx"
+            output_filename="3a_combined_report.xlsx"
         )
 
         AutomationReport.generate_filtered_unique_assets(
     combined_file_path=os.path.join(output_folder, "combined_report.xlsx"),
     output_folder=output_folder,
-    filtered_filename="filtered_unique_assets.xlsx"
+    filtered_filename="3b_filtered_unique_assets.xlsx"
 )
 
 
