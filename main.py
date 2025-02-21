@@ -45,19 +45,31 @@ if files_uploaded:
             output_folder=output_folder,
             output_filename="combined_report.xlsx"
         )
+
+        # Call foundation level function
+        AutomationReport.combine_excel_files_foundation_level(
+            input_folder=upload_folder,
+            output_folder=output_folder,
+            output_filename="combined_reportFoundationLevel.xlsx"
+        )
+
+        # Call Z-level filtered report function (provide the correct path for the input file)
+        AutomationReport.generate_z_level_filtered_report(
+            input_file_path=os.path.join(upload_folder, "03a-CombinedSOPsDIMs_Check.xlsx"),
+            output_folder=output_folder
+        )
+
         st.success("File processing complete!")
-        
+
         # Zip the output folder
         zip_path = "processed_files.zip"
         with ZipFile(zip_path, 'w') as zipf:
             for root, dirs, files in os.walk(output_folder):
                 for file in files:
                     zipf.write(os.path.join(root, file), arcname=file)
-        
+
         # Provide a download button for the ZIP file
         with open(zip_path, "rb") as f:
             st.download_button(
-                label="Download Processed Files", 
-                data=f, 
-                file_name="processed_files.zip"
-            )
+                label="Do
+
