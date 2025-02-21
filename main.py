@@ -39,36 +39,30 @@ if uploaded_files:
 
 if files_uploaded:
     if st.button("Process Uploaded Files"):
-        # Call side-by-side function
+        # ✅ Generate Combined Report (Original)
         AutomationReport.combine_excel_files_side_by_side(
             input_folder=upload_folder,
             output_folder=output_folder,
             output_filename="combined_report.xlsx"
         )
 
-        # Call foundation level function
-        AutomationReport.combine_excel_files_foundation_level(
-            input_folder=upload_folder,
+        # ✅ Generate Filtered Unique Assets Report (New)
+        AutomationReport.generate_filtered_unique_assets(
+            combined_file_path=os.path.join(output_folder, "combined_report.xlsx"),
             output_folder=output_folder,
-            output_filename="combined_reportFoundationLevel.xlsx"
-        )
-
-        # Call Z-level filtered report function (provide the correct path for the input file)
-        AutomationReport.generate_z_level_filtered_report(
-            input_file_path=os.path.join(upload_folder, "03a-CombinedSOPsDIMs_Check.xlsx"),
-            output_folder=output_folder
+            output_filename="filtered_unique_assets.xlsx"
         )
 
         st.success("File processing complete!")
 
-        # Zip the output folder
+        # ✅ Zip both reports together
         zip_path = "processed_files.zip"
         with ZipFile(zip_path, 'w') as zipf:
             for root, dirs, files in os.walk(output_folder):
                 for file in files:
                     zipf.write(os.path.join(root, file), arcname=file)
 
-        # Provide a download button for the ZIP file
+        # ✅ Provide download button
         with open(zip_path, "rb") as f:
             st.download_button(
                 label="Download Processed Files", 
