@@ -84,7 +84,7 @@ def combine_excel_files_foundation_level(
 def generate_filtered_unique_assets(
     combined_file_path,
     output_folder="Output_Reports",
-    filtered_filename="filtered_unique_assets.xlsx",
+    filtered_filename="3a_filtered_unique_assets.xlsx",
     z_threshold=81610
 ):
     """
