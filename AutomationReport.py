@@ -80,4 +80,18 @@ def combine_excel_files_foundation_level(
 
 
 # add a function for foundation level assets
-# Speak to Gilberto and show him how can I see assets that are on foundation level, check the second excel sheet
+def generate_filtered_unique_assets(
+    combined_file_path,
+    output_folder="Output_Reports",
+    output_filename="filtered_unique_assets.xlsx"
+):
+    """
+    Reads the combined report and filters it to show only unique assets based on 'Name', 'Width (mm)', 'Depth (mm)', and 'Height (mm)'.
+    """
+    df = pd.read_excel(combined_file_path, engine="openpyxl")
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+    # Filter for unique assets
+    unique_assets = df.drop_duplicates(subset=["Name", "Width (mm)", "Depth (mm)", "Height (mm)"])
+    output_path = os.path.join(output_folder, output_filename)
+    unique_assets.to_excel(output_path, index=False, engine="openpyxl")
