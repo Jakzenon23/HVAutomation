@@ -85,6 +85,7 @@ def generate_filtered_and_unique_assets(
     output_folder="Output_Reports",
     filtered_filename="filtered_report.xlsx",
     unique_assets_filename="unique_assets_report.xlsx",
+    z_threshold=81610
 ):
     """
     Generates:
