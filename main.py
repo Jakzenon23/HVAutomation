@@ -39,19 +39,19 @@ if uploaded_files:
 
 if files_uploaded:
     if st.button("Process Uploaded Files"):
-        # ✅ Generate Combined Report (Original)
+        # ✅ Generate Combined Report (Renamed to 3a_combined_report.xlsx)
         AutomationReport.combine_excel_files_side_by_side(
             input_folder=upload_folder,
             output_folder=output_folder,
-            output_filename="combined_report.xlsx"
+            output_filename="3a_combined_report.xlsx"  # ✅ Renamed here
         )
 
+        # ✅ Generate Filtered Unique Assets Report (Renamed to 3b_filtered_unique_assets.xlsx)
         AutomationReport.generate_filtered_unique_assets(
-    combined_file_path=os.path.join(output_folder, "3a_combined_report.xlsx"),
-    output_folder=output_folder,
-    filtered_filename="3a_filtered_unique_assets.xlsx"
-)
-
+            combined_file_path=os.path.join(output_folder, "3a_combined_report.xlsx"),  # ✅ Updated reference
+            output_folder=output_folder,
+            filtered_filename="3b_filtered_unique_assets.xlsx"  # ✅ Renamed here
+        )
 
         st.success("File processing complete!")
 
