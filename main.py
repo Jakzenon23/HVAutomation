@@ -71,5 +71,7 @@ if files_uploaded:
         # Provide a download button for the ZIP file
         with open(zip_path, "rb") as f:
             st.download_button(
-                label="Do
-
+                label="Download Processed Files", 
+                data=f, 
+                file_name="processed_files.zip"
+            )
