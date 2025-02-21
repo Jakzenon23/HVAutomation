@@ -46,12 +46,11 @@ if files_uploaded:
             output_filename="combined_report.xlsx"
         )
 
-        AutomationReport.generate_filtered_and_unique_assets(
+        AutomationReport.generate_filtered_unique_assets(
     combined_file_path=os.path.join(output_folder, "combined_report.xlsx"),
     output_folder=output_folder,
-    filtered_filename="filtered_unique_assets.xlsx",
-    unique_assets_filename="unique_assets_report.xlsx" 
-        )
+    filtered_filename="filtered_unique_assets.xlsx"
+)
 
 
         st.success("File processing complete!")
