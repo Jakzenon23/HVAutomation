@@ -79,7 +79,8 @@ def combine_excel_files_foundation_level(
 
 
 
-# add a function for foundation level assets
+# add a function for foundation level asset
+
 def generate_filtered_unique_assets(
     combined_file_path,
     output_folder="Output_Reports",
@@ -87,12 +88,14 @@ def generate_filtered_unique_assets(
     z_threshold=81610
 ):
     """
-    Generates a filtered unique assets report with:
-    - Rows where Z < z_threshold
-    - Excluded bypass assets
-    - Unique assets based on 'Name' only
-    - Columns: Name, ID, Width (mm), Depth (mm), Height (mm)
+    Generates a filtered unique assets report:
+    - Filters rows where Z < z_threshold
+    - Excludes bypass assets
+    - Selects exact columns matching the original output
+    - Deduplicates based on 'Name', 'Width (mm)', 'Depth (mm)', 'Height (mm)'
+    - Outputs a single Excel file with: Name, ID, Width (mm), Depth (mm), Height (mm)
     """
+
     # * Assets to bypass
     bypass_assets = [
         "275 TO 400 SGT HYOSUNG - 275 TO 400 SGT HYOSUNG",
@@ -101,21 +104,30 @@ def generate_filtered_unique_assets(
         "SGT 400-132kV - SGT 400-132kV"
     ]
 
-    # * Read the combined Excel file
-    df = pd.read_excel(combined_file_path, engine="openpyxl")
+    # * Read the combined Excel file, skipping the first row (matches original code)
+    df = pd.read_excel(combined_file_path, engine="openpyxl", skiprows=1)
 
-    # * Filter rows where Z < z_threshold and exclude bypass assets
-    filtered_df = df[(df["Z"] < z_threshold) & (~df["Name"].isin(bypass_assets))]
+    # * Convert DataFrame to list of lists (replicating original logic)
+    all_rows = df.values.tolist()
 
-    # * Select required columns (NO X, Y, Z)
-    filtered_df = filtered_df[["Name", "ID", "Width (mm)", "Depth (mm)", "Height (mm)"]]
+    # * Step 1: Filter rows where Z (4th column, index 3) < z_threshold
+    filtered_rows_F1 = [row for row in all_rows if row[3] < z_threshold]
 
-    # ✅ * Remove duplicates based on 'Name' ONLY
-    unique_filtered_df = filtered_df.drop_duplicates(subset=["Name"])
+    # * Step 2: Exclude bypass assets
+    filtered_rows = [row for row in filtered_rows_F1 if row[0] not in bypass_assets]
 
-    # * Save the final filtered unique assets report
+    # * Step 3: Convert filtered rows back to DataFrame
+    filtered_df = pd.DataFrame(filtered_rows, columns=df.columns)
+
+    # * Step 4: Deduplicate based on original columns: Name, Width, Depth, Height
+    unique_assets = filtered_df.drop_duplicates(subset=[df.columns[0], df.columns[7], df.columns[8], df.columns[9]])
+
+    # * Step 5: Select only required columns for the final output
+    unique_assets_filtered = unique_assets[[df.columns[0], df.columns[4], df.columns[7], df.columns[8], df.columns[9]]]
+    unique_assets_filtered.columns = ["Name", "ID", "Width (mm)", "Depth (mm)", "Height (mm)"]
+
+    # * Step 6: Save the final filtered unique assets report
     os.makedirs(output_folder, exist_ok=True)
     filtered_output_path = os.path.join(output_folder, filtered_filename)
-    unique_filtered_df.to_excel(filtered_output_path, index=False)
-
+    unique_assets_filtered.to_excel(filtered_output_path, index=False)
 
