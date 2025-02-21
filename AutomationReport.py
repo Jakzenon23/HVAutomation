@@ -91,6 +91,7 @@ def generate_filtered_unique_assets(
     - Z < z_threshold
     - Excludes bypass assets
     - Shows only unique assets based on Name, Width, Depth, and Height
+    - Columns: Name, ID, Width (mm), Depth (mm), Height (mm)
     """
     # * Assets to bypass
     bypass_assets = [
@@ -106,15 +107,16 @@ def generate_filtered_unique_assets(
     # * Filter rows where Z < z_threshold and exclude bypassed assets
     filtered_df = df[(df["Z"] < z_threshold) & (~df["Name"].isin(bypass_assets))]
 
-    # * Select required columns for the final output
-    filtered_df = filtered_df[["Name", "X", "Y", "Z", "ID", "Width (mm)", "Depth (mm)", "Height (mm)", "Rotation"]]
+    # * Select only the required columns (NO X, Y, Z)
+    filtered_df = filtered_df[["Name", "ID", "Width (mm)", "Depth (mm)", "Height (mm)"]]
 
-    # * Remove duplicates based on Name, Width, Depth, and Height (unique assets)
+    # * Remove duplicates to get unique assets
     unique_filtered_df = filtered_df.drop_duplicates(subset=["Name", "Width (mm)", "Depth (mm)", "Height (mm)"])
 
     # * Save the final filtered unique assets report
     os.makedirs(output_folder, exist_ok=True)
     filtered_output_path = os.path.join(output_folder, filtered_filename)
     unique_filtered_df.to_excel(filtered_output_path, index=False)
+
 
 
