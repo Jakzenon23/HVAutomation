@@ -80,18 +80,45 @@ def combine_excel_files_foundation_level(
 
 
 # add a function for foundation level assets
-def generate_filtered_unique_assets(
+def generate_filtered_and_unique_assets(
     combined_file_path,
     output_folder="Output_Reports",
-    output_filename="filtered_unique_assets.xlsx"
+    filtered_filename="filtered_report.xlsx",
+    unique_assets_filename="unique_assets_report.xlsx",
 ):
     """
-    Reads the combined report and filters it to show only unique assets based on 'Name', 'Width (mm)', 'Depth (mm)', and 'Height (mm)'.
+    Generates:
+    1. A filtered report with rows having Z < z_threshold and excluding bypass_assets.
+    2. A unique assets report based on 'Name', 'ID', 'Width (mm)', 'Depth (mm)', and 'Height (mm)'.
+    The files are saved in the output_folder with the specified filenames.
     """
+
+    # * Assets to bypass
+    bypass_assets = [
+        "275 TO 400 SGT HYOSUNG - 275 TO 400 SGT HYOSUNG",
+        "Foundation - GantryFoundation",
+        "shunt reactor - shunt reactor",
+        "SGT 400-132kV - SGT 400-132kV"
+    ]
+
+    # * Read the combined Excel file (no skiprows unless required)
     df = pd.read_excel(combined_file_path, engine="openpyxl")
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
-    # Filter for unique assets
-    unique_assets = df.drop_duplicates(subset=["Name", "Width (mm)", "Depth (mm)", "Height (mm)"])
-    output_path = os.path.join(output_folder, output_filename)
-    unique_assets.to_excel(output_path, index=False, engine="openpyxl")
+
+    # * Filter rows where Z < z_threshold and not in bypass_assets
+    filtered_df = df[(df["Z"] < z_threshold) & (~df["Name"].isin(bypass_assets))]
+
+    # * Select required columns (matching desired output)
+    filtered_df = filtered_df[["Name", "X", "Y", "Z", "ID", "Width (mm)", "Depth (mm)", "Height (mm)", "Rotation"]]
+
+    # * Save the filtered report
+    os.makedirs(output_folder, exist_ok=True)
+    filtered_output_path = os.path.join(output_folder, filtered_filename)
+    filtered_df.to_excel(filtered_output_path, index=False)
+
+    # * Create and save the unique assets report
+    unique_assets = filtered_df.drop_duplicates(subset=["Name", "Width (mm)", "Depth (mm)", "Height (mm)"])
+    unique_assets = unique_assets[["Name", "ID", "Width (mm)", "Depth (mm)", "Height (mm)"]]
+
+    unique_output_path = os.path.join(output_folder, unique_assets_filename)
+    unique_assets.to_excel(unique_output_path, index=False)
+
