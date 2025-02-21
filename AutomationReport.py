@@ -37,7 +37,7 @@ def combine_excel_files_side_by_side(
 def combine_excel_files_foundation_level(
     input_folder="DWG_Reports", 
     output_folder="Output_Reports", 
-    output_filename="3b_combined_reportFoundationLevel.xlsx",
+    output_filename="3a_combined_reportFoundationLevel.xlsx",
     filter_column="Level",
     filter_value="Foundation"
 ):
@@ -84,7 +84,7 @@ def combine_excel_files_foundation_level(
 def generate_filtered_unique_assets(
     combined_file_path,
     output_folder="Output_Reports",
-    filtered_filename="3a_filtered_unique_assets.xlsx",
+    filtered_filename="3b_filtered_unique_assets.xlsx",
     z_threshold=81610
 ):
     """
