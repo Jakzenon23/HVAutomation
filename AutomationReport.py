@@ -4,7 +4,7 @@ import os
 def combine_excel_files_side_by_side(
     input_folder="DWG_Reports", 
     output_folder="Output_Reports", 
-    output_filename="3a_combined_report.xlsx"  # ✅ Default renamed
+    output_filename="3a_combined_report.xlsx" 
 ):
     """
     Reads all Excel files in the input folder and places them side by side
@@ -38,7 +38,7 @@ def combine_excel_files_side_by_side(
 def generate_filtered_unique_assets(
     combined_file_path,
     output_folder="Output_Reports",
-    filtered_filename="3b_filtered_unique_assets.xlsx",  # ✅ Default renamed
+    filtered_filename="3b_filtered_unique_assets.xlsx",
     z_threshold=81610
 ):
     """
