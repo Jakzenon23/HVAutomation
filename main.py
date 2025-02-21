@@ -39,30 +39,30 @@ if uploaded_files:
 
 if files_uploaded:
     if st.button("Process Uploaded Files"):
-        # ✅ Generate Combined Report (Renamed to 3a_combined_report.xlsx)
+        # calling of the combined excel file function
         AutomationReport.combine_excel_files_side_by_side(
             input_folder=upload_folder,
             output_folder=output_folder,
-            output_filename="3a_combined_report.xlsx"  # ✅ Renamed here
+            output_filename="3a_combined_report.xlsx" 
         )
 
-        # ✅ Generate Filtered Unique Assets Report (Renamed to 3b_filtered_unique_assets.xlsx)
+        #  Generate Filtered Unique Assets Report (Renamed to 3b_filtered_unique_assets.xlsx)
         AutomationReport.generate_filtered_unique_assets(
-            combined_file_path=os.path.join(output_folder, "3a_combined_report.xlsx"),  # ✅ Updated reference
+            combined_file_path=os.path.join(output_folder, "3a_combined_report.xlsx"), 
             output_folder=output_folder,
-            filtered_filename="3b_filtered_unique_assets.xlsx"  # ✅ Renamed here
+            filtered_filename="3b_filtered_unique_assets.xlsx"  
         )
 
         st.success("File processing complete!")
 
-        # ✅ Zip both reports together
+        # zips both of the files into 
         zip_path = "processed_files.zip"
         with ZipFile(zip_path, 'w') as zipf:
             for root, dirs, files in os.walk(output_folder):
                 for file in files:
                     zipf.write(os.path.join(root, file), arcname=file)
 
-        # ✅ Provide download button
+        # provide download button
         with open(zip_path, "rb") as f:
             st.download_button(
                 label="Download Processed Files", 
