@@ -80,6 +80,7 @@ def combine_excel_files_foundation_level(
 
 
 # add a function for foundation level asset
+
 def generate_filtered_unique_assets(
     combined_file_path,
     output_folder="Output_Reports",
@@ -87,10 +88,10 @@ def generate_filtered_unique_assets(
     z_threshold=81610
 ):
     """
-    Generates a filtered report with:
+    Generates a filtered unique assets report with:
     - Rows where Z < z_threshold
     - Excluded bypass assets
-    - NO deduplication (every individual asset shown)
+    - Unique assets based on 'Name' only
     - Columns: Name, ID, Width (mm), Depth (mm), Height (mm)
     """
     # * Assets to bypass
@@ -102,16 +103,19 @@ def generate_filtered_unique_assets(
     ]
 
     # * Read the combined Excel file
-    df = pd.read_excel(combined_file_path, engine="openpyxl", skiprows=1)
+    df = pd.read_excel(combined_file_path, engine="openpyxl")
 
     # * Filter rows where Z < z_threshold and exclude bypass assets
     filtered_df = df[(df["Z"] < z_threshold) & (~df["Name"].isin(bypass_assets))]
 
-    # * Select only the required columns (NO X, Y, Z, Rotation)
+    # * Select required columns (NO X, Y, Z)
     filtered_df = filtered_df[["Name", "ID", "Width (mm)", "Depth (mm)", "Height (mm)"]]
 
-    # * Save the filtered report with NO deduplication
+    # ✅ * Remove duplicates based on 'Name' ONLY
+    unique_filtered_df = filtered_df.drop_duplicates(subset=["Name"])
+
+    # * Save the final filtered unique assets report
     os.makedirs(output_folder, exist_ok=True)
     filtered_output_path = os.path.join(output_folder, filtered_filename)
-    filtered_df.to_excel(filtered_output_path, index=False)
+    unique_filtered_df.to_excel(filtered_output_path, index=False)
 
