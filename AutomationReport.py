@@ -80,9 +80,6 @@ def combine_excel_files_foundation_level(
 
 
 # add a function for foundation level asset
-import pandas as pd
-import os
-
 def generate_filtered_unique_assets(
     combined_file_path,
     output_folder="Output_Reports",
