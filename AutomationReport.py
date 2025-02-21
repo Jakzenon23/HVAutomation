@@ -80,3 +80,4 @@ def combine_excel_files_foundation_level(
 
 
 # add a function for foundation level assets
+# Speak to Gilberto and show him how can I see assets that are on foundation level, check the second excel sheet
