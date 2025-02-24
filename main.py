@@ -55,12 +55,10 @@ if files_uploaded:
 
         st.success("File processing complete!")
 
-        # zips both of the files into 
+        # zip only the filtered report
         zip_path = "processed_files.zip"
         with ZipFile(zip_path, 'w') as zipf:
-            for root, dirs, files in os.walk(output_folder):
-                for file in files:
-                    zipf.write(os.path.join(root, file), arcname=file)
+            zipf.write(os.path.join(output_folder, "3b_filtered_unique_assets.xlsx"), arcname="3b_filtered_unique_assets.xlsx")
 
         # provide download button
         with open(zip_path, "rb") as f:
