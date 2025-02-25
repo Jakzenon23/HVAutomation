@@ -7,7 +7,7 @@ from zipfile import ZipFile
 def delete_folder(folder_path):
     try:
         shutil.rmtree(folder_path)
-    except Exception as e:
+    except Exception:
         pass  # Silently ignore or handle errors
 
 # Clean up folders
@@ -40,13 +40,12 @@ if uploaded_files:
 if files_uploaded:
     if st.button("Process Uploaded Files"):
 
-        #  Generate Filtered Unique Assets Report (Renamed to 3b_filtered_unique_assets.xlsx)
-        AutomationReport.generate_filtered_unique_assets(
-    combined_file_path=os.path.join(output_folder, "3a_combined_report.xlsx"), 
-    output_folder=output_folder,
-    filtered_filename="3b_filtered_unique_assets.xlsx"  
-    )
-
+        # ✅ Call the updated function that processes directly from the folder
+        AutomationReport.generate_filtered_unique_assets_from_folder(
+            input_folder=upload_folder,
+            output_folder=output_folder,
+            filtered_filename="3b_filtered_unique_assets.xlsx"
+        )
 
         st.success("File processing complete!")
 
