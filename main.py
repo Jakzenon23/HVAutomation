@@ -39,12 +39,6 @@ if uploaded_files:
 
 if files_uploaded:
     if st.button("Process Uploaded Files"):
-        # calling of the combined excel file function
-        AutomationReport.combine_excel_files_side_by_side(
-            input_folder=upload_folder,
-            output_folder=output_folder,
-            output_filename="3a_combined_report.xlsx" 
-        )
 
         #  Generate Filtered Unique Assets Report (Renamed to 3b_filtered_unique_assets.xlsx)
         AutomationReport.generate_filtered_unique_assets(
