@@ -41,7 +41,7 @@ if files_uploaded:
     if st.button("Process Uploaded Files"):
 
         #  Generate Filtered Unique Assets Report (Renamed to 3b_filtered_unique_assets.xlsx)
-        AutomationReport.generate_filtered_unique_assets(
+        AutomationReport.generate_filtered_unique_assets_from_folder(
             combined_file_path=os.path.join(output_folder, "3a_combined_report.xlsx"), 
             output_folder=output_folder,
             filtered_filename="3b_filtered_unique_assets.xlsx"  
