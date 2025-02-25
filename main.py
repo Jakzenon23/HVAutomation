@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 import shutil
-import AutomationReport 
+import AutomationReport
 from zipfile import ZipFile
 
 def delete_folder(folder_path):
@@ -40,29 +40,36 @@ if uploaded_files:
 if files_uploaded:
     if st.button("Process Uploaded Files"):
 
-        # ✅ Call the updated function that processes directly from the folder
-        AutomationReport.generate_filtered_unique_assets_from_folder(
+        # ✅ Step 1: Generate the combined report (no download provided for this file)
+        AutomationReport.combine_excel_files_side_by_side(
             input_folder=upload_folder,
+            output_folder=output_folder,
+            output_filename="3a_combined_report.xlsx"
+        )
+
+        # ✅ Step 2: Generate the filtered unique assets report from the combined report
+        AutomationReport.generate_filtered_unique_assets(
+            combined_file_path=os.path.join(output_folder, "3a_combined_report.xlsx"),
             output_folder=output_folder,
             filtered_filename="3b_filtered_unique_assets.xlsx"
         )
 
         filtered_file_path = os.path.join(output_folder, "3b_filtered_unique_assets.xlsx")
 
-        # ✅ Check if the filtered file was created successfully
+        # ✅ Step 3: Check if filtered file exists and provide download
         if os.path.exists(filtered_file_path):
-            st.success("File processing complete!")
+            st.success("✅ File processing complete! The filtered unique assets report is ready.")
 
-            # zip only the filtered report
+            # Zip only the filtered report
             zip_path = "processed_files.zip"
             with ZipFile(zip_path, 'w') as zipf:
                 zipf.write(filtered_file_path, arcname="3b_filtered_unique_assets.xlsx")
 
-            # provide download button
+            # Provide download button
             with open(zip_path, "rb") as f:
                 st.download_button(
-                    label="Download Processed Files", 
-                    data=f, 
+                    label="⬇️ Download Processed Files",
+                    data=f,
                     file_name="processed_files.zip"
                 )
         else:
