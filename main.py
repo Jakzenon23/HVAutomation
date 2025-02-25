@@ -47,17 +47,23 @@ if files_uploaded:
             filtered_filename="3b_filtered_unique_assets.xlsx"
         )
 
-        st.success("File processing complete!")
+        filtered_file_path = os.path.join(output_folder, "3b_filtered_unique_assets.xlsx")
 
-        # zip only the filtered report
-        zip_path = "processed_files.zip"
-        with ZipFile(zip_path, 'w') as zipf:
-            zipf.write(os.path.join(output_folder, "3b_filtered_unique_assets.xlsx"), arcname="3b_filtered_unique_assets.xlsx")
+        # ✅ Check if the filtered file was created successfully
+        if os.path.exists(filtered_file_path):
+            st.success("File processing complete!")
 
-        # provide download button
-        with open(zip_path, "rb") as f:
-            st.download_button(
-                label="Download Processed Files", 
-                data=f, 
-                file_name="processed_files.zip"
-            )
+            # zip only the filtered report
+            zip_path = "processed_files.zip"
+            with ZipFile(zip_path, 'w') as zipf:
+                zipf.write(filtered_file_path, arcname="3b_filtered_unique_assets.xlsx")
+
+            # provide download button
+            with open(zip_path, "rb") as f:
+                st.download_button(
+                    label="Download Processed Files", 
+                    data=f, 
+                    file_name="processed_files.zip"
+                )
+        else:
+            st.error("❌ Filtered report could not be generated. Please check if the uploaded files contain the required data.")
