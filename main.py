@@ -40,14 +40,14 @@ if uploaded_files:
 if files_uploaded:
     if st.button("Process Uploaded Files"):
 
-        # ✅ Step 1: Generate the combined report (no download provided for this file)
+        #  Step 1: Generate the combined report (no download provided for this file)
         AutomationReport.combine_excel_files_side_by_side(
             input_folder=upload_folder,
             output_folder=output_folder,
             output_filename="3a_combined_report.xlsx"
         )
 
-        # ✅ Step 2: Generate the filtered unique assets report from the combined report
+        #  Step 2: Generate the filtered unique assets report from the combined report
         AutomationReport.generate_filtered_unique_assets(
             combined_file_path=os.path.join(output_folder, "3a_combined_report.xlsx"),
             output_folder=output_folder,
@@ -56,7 +56,7 @@ if files_uploaded:
 
         filtered_file_path = os.path.join(output_folder, "3b_filtered_unique_assets.xlsx")
 
-        # ✅ Step 3: Check if filtered file exists and provide download
+        #  Step 3: Check if filtered file exists and provide download
         if os.path.exists(filtered_file_path):
             st.success("✅ File processing complete! The filtered unique assets report is ready.")
 
